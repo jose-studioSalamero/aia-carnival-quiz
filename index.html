@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#ff01b4">
+		<title>AIA Carnival | Next-Gen Fan Intake Interview</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Noto+Sans+HK:wght@700&family=Righteous&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="styles.css">
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<main class="quiz-shell" id="quiz-app">
+			<section class="panel intro-screen is-active" data-screen="intro" aria-labelledby="intro-title">
+				<img class="carnival-logo" src="assets/carnival-logo.png" alt="AIA Carnival, Great China Entertainment Group">
+
+				<header class="intro-copy">
+					<h1 id="intro-title">Next-Gen Fan<br>Intake Interview</h1>
+					<p>Welcome! We are scouting the next wave of fans to join us at the AIA Carnival.<br class="desktop-break"> Answer the questions to unlock your official fan persona.</p>
+				</header>
+
+				<section class="social-section" aria-labelledby="social-title">
+					<h2 id="social-title">First follow us on social media</h2>
+					<div class="social-cards">
+						<a class="social-card" href="https://www.instagram.com/aiacarnival/" target="_blank" rel="noreferrer">
+							<img class="qr-code" src="assets/instagram-qr.png" alt="QR code to AIA Carnival on Instagram">
+							<span class="social-label"><span class="instagram-mark" aria-hidden="true">◎</span> @aiacarnival</span>
+						</a>
+						<a class="social-card" href="https://www.xiaohongshu.com/search_result?keyword=%E5%8F%8B%E9%82%A6%E5%98%89%E5%B9%B4%E5%8D%8E" target="_blank" rel="noreferrer">
+							<img class="qr-code" src="assets/xiaohongshu-qr.png" alt="QR code to search for AIA Carnival on Xiaohongshu">
+							<span class="social-label social-label-hk"><span aria-hidden="true">小红书</span> 友邦嘉年华</span>
+						</a>
+					</div>
+				</section>
+
+				<button class="button button-primary intro-start" type="button" data-action="start">Start Now</button>
+			</section>
+
+			<section class="panel question-screen" data-screen="question" data-step="0" aria-labelledby="question-1-title" hidden>
+				<ol class="progress" aria-label="Question progress">
+					<li class="progress-step" data-progress-step="0"><span>1</span></li>
+					<li class="progress-step" data-progress-step="1"><span>2</span></li>
+					<li class="progress-step" data-progress-step="2"><span>3</span></li>
+					<li class="progress-step" data-progress-step="3"><span>4</span></li>
+					<li class="progress-step" data-progress-step="4"><span>5</span></li>
+				</ol>
+				<form class="question-form">
+					<fieldset>
+						<legend id="question-1-title">You’ve entered the AIA Carnival. What’s your first move?</legend>
+						<label class="answer-option"><input type="radio" name="q1" value="thrill"><span>Head straight for the fastest ride.</span></label>
+						<label class="answer-option"><input type="radio" name="q1" value="games" checked><span>Find the best game and plan your prize win.</span></label>
+						<label class="answer-option"><input type="radio" name="q1" value="food"><span>Hunt down the must-try food.</span></label>
+						<label class="answer-option"><input type="radio" name="q1" value="content"><span>Find the perfect selfie spot.</span></label>
+					</fieldset>
+					<div class="question-footer">
+						<p class="step-label">Step 1/5</p>
+						<div class="button-row">
+							<button class="button button-secondary" type="button" data-action="back">Back</button>
+							<button class="button button-primary" type="button" data-action="next">Next</button>
+						</div>
+					</div>
+				</form>
+			</section>
+
+			<section class="panel question-screen" data-screen="question" data-step="1" aria-labelledby="question-2-title" hidden>
+				<ol class="progress" aria-label="Question progress">
+					<li class="progress-step" data-progress-step="0"><span>1</span></li>
+					<li class="progress-step" data-progress-step="1"><span>2</span></li>
+					<li class="progress-step" data-progress-step="2"><span>3</span></li>
+					<li class="progress-step" data-progress-step="3"><span>4</span></li>
+					<li class="progress-step" data-progress-step="4"><span>5</span></li>
+				</ol>
+				<form class="question-form">
+					<fieldset>
+						<legend id="question-2-title">You have HK$200 and 30 minutes before the rush. What’s your plan?</legend>
+						<label class="answer-option"><input type="radio" name="q2" value="thrill"><span>Fit in as many rides as possible.</span></label>
+						<label class="answer-option"><input type="radio" name="q2" value="games" checked><span>Target games with the best prize potential.</span></label>
+						<label class="answer-option"><input type="radio" name="q2" value="food"><span>Sample as many Carnival treats as possible.</span></label>
+						<label class="answer-option"><input type="radio" name="q2" value="content"><span>Find the best-lit spots for standout content.</span></label>
+					</fieldset>
+					<div class="question-footer">
+						<p class="step-label">Step 2/5</p>
+						<div class="button-row">
+							<button class="button button-secondary" type="button" data-action="back">Back</button>
+							<button class="button button-primary" type="button" data-action="next">Next</button>
+						</div>
+					</div>
+				</form>
+			</section>
+
+			<section class="panel question-screen" data-screen="question" data-step="2" aria-labelledby="question-3-title" hidden>
+				<ol class="progress" aria-label="Question progress">
+					<li class="progress-step" data-progress-step="0"><span>1</span></li>
+					<li class="progress-step" data-progress-step="1"><span>2</span></li>
+					<li class="progress-step" data-progress-step="2"><span>3</span></li>
+					<li class="progress-step" data-progress-step="3"><span>4</span></li>
+					<li class="progress-step" data-progress-step="4"><span>5</span></li>
+				</ol>
+				<form class="question-form">
+					<fieldset>
+						<legend id="question-3-title">It’s 7 pm and you need a recharge. What do you choose?</legend>
+						<label class="answer-option"><input type="radio" name="q3" value="food"><span>A quick coffee, then back to the rides.</span></label>
+						<label class="answer-option"><input type="radio" name="q3" value="food" checked><span>A clean, easy snack between games.</span></label>
+						<label class="answer-option"><input type="radio" name="q3" value="food"><span>A street-food feast with all the favourites.</span></label>
+						<label class="answer-option"><input type="radio" name="q3" value="content"><span>The most photogenic treat on offer.</span></label>
+					</fieldset>
+					<div class="question-footer">
+						<p class="step-label">Step 3/5</p>
+						<div class="button-row">
+							<button class="button button-secondary" type="button" data-action="back">Back</button>
+							<button class="button button-primary" type="button" data-action="next">Next</button>
+						</div>
+					</div>
+				</form>
+			</section>
+
+			<section class="panel question-screen" data-screen="question" data-step="3" aria-labelledby="question-4-title" hidden>
+				<ol class="progress" aria-label="Question progress">
+					<li class="progress-step" data-progress-step="0"><span>1</span></li>
+					<li class="progress-step" data-progress-step="1"><span>2</span></li>
+					<li class="progress-step" data-progress-step="2"><span>3</span></li>
+					<li class="progress-step" data-progress-step="3"><span>4</span></li>
+					<li class="progress-step" data-progress-step="4"><span>5</span></li>
+				</ol>
+				<form class="question-form">
+					<fieldset>
+						<legend id="question-4-title">Suggested version: What proves your Carnival night was a success?</legend>
+						<label class="answer-option"><input type="radio" name="q4" value="thrill"><span>Ride Count: Four or more thrilling rides.</span></label>
+						<label class="answer-option"><input type="radio" name="q4" value="games" checked><span>Prize Haul: One giant plushie.</span></label>
+						<label class="answer-option"><input type="radio" name="q4" value="food"><span>Taste Index: Five or more dishes tried.</span></label>
+						<label class="answer-option"><input type="radio" name="q4" value="content"><span>Content Score: A post, Reel and night portraits.</span></label>
+					</fieldset>
+					<div class="question-footer">
+						<p class="step-label">Step 4/5</p>
+						<div class="button-row">
+							<button class="button button-secondary" type="button" data-action="back">Back</button>
+							<button class="button button-primary" type="button" data-action="next">Next</button>
+						</div>
+					</div>
+				</form>
+			</section>
+
+			<section class="panel question-screen" data-screen="question" data-step="4" aria-labelledby="question-5-title" hidden>
+				<ol class="progress" aria-label="Question progress">
+					<li class="progress-step" data-progress-step="0"><span>1</span></li>
+					<li class="progress-step" data-progress-step="1"><span>2</span></li>
+					<li class="progress-step" data-progress-step="2"><span>3</span></li>
+					<li class="progress-step" data-progress-step="3"><span>4</span></li>
+					<li class="progress-step" data-progress-step="4"><span>5</span></li>
+				</ol>
+				<form class="question-form">
+					<fieldset>
+						<legend id="question-5-title">Why should you be recruited as a Next-Gen Superfan?</legend>
+						<label class="answer-option"><input type="radio" name="q5" value="thrill"><span>I bring fearless energy to every ride.</span></label>
+						<label class="answer-option"><input type="radio" name="q5" value="games" checked><span>I turn every game into a winning strategy.</span></label>
+						<label class="answer-option"><input type="radio" name="q5" value="food"><span>I discover and celebrate the best flavours.</span></label>
+						<label class="answer-option"><input type="radio" name="q5" value="content"><span>I create content that brings the Carnival to life.</span></label>
+					</fieldset>
+					<div class="question-footer">
+						<p class="step-label">Step 5/5</p>
+						<div class="button-row">
+							<button class="button button-secondary" type="button" data-action="back">Back</button>
+							<button class="button button-primary" type="button" data-action="result">View My Persona</button>
+						</div>
+					</div>
+				</form>
+			</section>
+
+			<section class="panel result-screen" data-screen="result" aria-labelledby="persona-name" hidden>
+				<p class="persona-pill">Your Official Persona</p>
+				<img class="persona-art" src="assets/zippy-cappy-persona.png" alt="Zippy Cappy mascot celebrating among the Carnival rides">
+				<div class="persona-copy">
+					<h2 id="persona-name"><span>Zippy Cappy</span><strong>Daredevil</strong></h2>
+					<p class="persona-tagline">High-Velocity Thrill-Seeker</p>
+					<dl class="persona-details">
+						<div><dt>Superpower:</dt><dd>Unmatched endurance, fearless coaster energy</dd></div>
+						<div><dt>Mission:</dt><dd>Set the standard for maximising ride pacing, conquer every new attraction</dd></div>
+					</dl>
+				</div>
+				<div class="result-actions">
+					<button class="button button-secondary" type="button" data-action="result-back">Back</button>
+					<button class="button button-primary" type="button" data-action="retry">Try Again</button>
+				</div>
+				<div class="persona-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+			</section>
+		</main>
+	</body>
+</html>
