@@ -326,7 +326,7 @@ button {
 	transition: color 140ms ease, background-color 140ms ease;
 }
 
-.answer-option:nth-of-type(3) {
+.answer-option:hover:not(:has(input:checked)) {
 	background: rgba(255, 255, 255, 0.25);
 }
 
