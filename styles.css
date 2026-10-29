@@ -292,6 +292,17 @@ button {
 	gap: 16px;
 }
 
+.question-error {
+	margin: 12px 0 0;
+	color: var(--carnival-white);
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.question-error[hidden] {
+	display: none;
+}
+
 .question-form legend {
 	width: 100%;
 	margin: 0 0 16px;
@@ -433,6 +444,12 @@ button {
 	font-size: 16px;
 	font-weight: 700;
 	line-height: 1.5;
+}
+
+.persona-score {
+	margin: 0 0 16px;
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .persona-details {
