@@ -74,6 +74,7 @@ const messages = {
 		personaScore: "Dominant Letter: Mostly {letter} · {score} out of 5 answers",
 		primaryArchetype: "Primary Archetype",
 		saving: "Saving…", saveError: "We couldn't save your answers. Please try again.",
+		artworkError: "We couldn't load your persona card. Please try again.",
 	},
 	"zh-Hant": {
 		appTitle: "友邦嘉年華｜新一代個性探索",
@@ -109,6 +110,7 @@ const messages = {
 		superpower: "超能力：", mission: "任務：",
 		personaScore: "最多字母：主要是{letter} · {score}/5",
 		saving: "正在儲存…", saveError: "未能儲存你的答案，請再試一次。",
+		artworkError: "未能載入你的角色卡，請再試一次。",
 	},
 	"zh-Hans": {
 		appTitle: "友邦嘉年华｜新一代个性探索",
@@ -144,6 +146,7 @@ const messages = {
 		superpower: "超能力：", mission: "任务：",
 		personaScore: "最多字母：主要是{letter} · {score}/5",
 		saving: "正在保存…", saveError: "未能保存你的答案，请重试。",
+		artworkError: "未能加载你的角色卡，请重试。",
 	},
 };
 
@@ -240,12 +243,19 @@ function isCurrentAnswerValid() {
 	return false;
 }
 
-function showPersona(result = calculatePersona(questions.map((question) => getSelectedCategory(question.querySelector(".question-form"))))) {
+function preloadPersonaArtwork(persona) {
+	const artwork = new Image();
+	artwork.src = persona.art;
+	return artwork.decode().then(() => artwork);
+}
+
+function showPersona(result = calculatePersona(questions.map((question) => getSelectedCategory(question.querySelector(".question-form")))), preloadedArtwork) {
 	const persona = personas[result.category];
 	const artwork = document.querySelector(".persona-art");
 
-	artwork.src = persona.art;
 	artwork.alt = `${persona.mascot} ${persona.title[activeLocale]} persona card`;
+	artwork.src = preloadedArtwork?.src ?? persona.art;
+	artwork.dataset.loaded = "true";
 	document.querySelector("[data-persona-mascot]").textContent = persona.mascot;
 	document.querySelector("[data-persona-title]").textContent = persona.title[activeLocale];
 	document.querySelector("[data-persona-tagline]").textContent = persona.tagline[activeLocale];
@@ -331,8 +341,33 @@ document.addEventListener("click", async (event) => {
 			const saveError = document.querySelector(".submission-error");
 			saveError.hidden = true;
 			try {
-				const result = await submitQuiz();
-				showPersona(result);
+				const predictedCategory = calculatePersona(questions.map((question) => getSelectedCategory(question.querySelector(".question-form")))).category;
+				const [submission, artwork] = await Promise.allSettled([
+					submitQuiz(),
+					preloadPersonaArtwork(personas[predictedCategory]),
+				]);
+				if (submission.status === "rejected") throw submission.reason;
+				if (artwork.status === "rejected") {
+					console.error("Could not load persona artwork.", artwork.reason);
+					saveError.textContent = messages[activeLocale].artworkError;
+					saveError.hidden = false;
+					break;
+				}
+
+				const result = submission.value;
+				let preloadedArtwork = artwork.value;
+				if (result.category !== predictedCategory) {
+					try {
+						preloadedArtwork = await preloadPersonaArtwork(personas[result.category]);
+					} catch (error) {
+						console.error("Could not load persona artwork.", error);
+						saveError.textContent = messages[activeLocale].artworkError;
+						saveError.hidden = false;
+						break;
+					}
+				}
+
+				showPersona(result, preloadedArtwork);
 				showScreen("result");
 				document.querySelector("#persona-name").focus({ preventScroll: true });
 			} catch (error) {

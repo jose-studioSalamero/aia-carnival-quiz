@@ -553,8 +553,13 @@ button {
 	display: block;
 	width: 100%;
 	height: auto;
+	aspect-ratio: 2160 / 2697;
 	border: 1px solid rgba(255, 255, 255, 0.8);
 	object-fit: cover;
+}
+
+.persona-art:not([data-loaded="true"]) {
+	visibility: hidden;
 }
 
 .persona-copy {
