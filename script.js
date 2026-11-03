@@ -2,10 +2,13 @@ const screens = [...document.querySelectorAll("[data-screen]")];
 const questions = [...document.querySelectorAll(".question-screen")];
 let activeQuestion = 0;
 let activeLocale = "en";
+let submissionId = createSubmissionId();
+let submissionStarted = false;
 
 const personas = {
 	thrill: {
 		mascot: "ZIPPY CAPPY",
+		art: "assets/Carnival_Daredevil_PersonaCard_DAREDEVIL.png",
 		title: { en: "Daredevil", "zh-Hant": "Daredevil", "zh-Hans": "Daredevil" },
 		tagline: { en: "High-Velocity Thrill-Seeker", "zh-Hant": "極速冒險王", "zh-Hans": "极速冒险王" },
 		power: { en: "Unmatched endurance, fearless coaster energy", "zh-Hant": "無比耐力，無懼過山車能量", "zh-Hans": "无比耐力，无惧过山车能量" },
@@ -13,6 +16,7 @@ const personas = {
 	},
 	games: {
 		mascot: "ROBO-C12",
+		art: "assets/Carnival_Daredevil_PersonaCard_GAMEMVP.png",
 		title: { en: "Game MVP", "zh-Hant": "Game MVP", "zh-Hans": "Game MVP" },
 		tagline: { en: "Precision Game Strategist", "zh-Hant": "遊戲策略家", "zh-Hans": "游戏策略家" },
 		power: { en: "Physics mastery, token ROI optimization", "zh-Hant": "精通物理學及代幣投資回報率", "zh-Hans": "精通物理学及代币投资回报率" },
@@ -20,6 +24,7 @@ const personas = {
 	},
 	food: {
 		mascot: "VIOLET",
+		art: "assets/Carnival_Daredevil_PersonaCard_CERTRIFIEDFOODIE.png",
 		title: { en: "Certified Foodie", "zh-Hant": "Certified Foodie", "zh-Hans": "Certified Foodie" },
 		tagline: { en: "Culinary Explorer & Foodie", "zh-Hant": "美食獵人", "zh-Hans": "美食猎人" },
 		power: { en: "Trend forecasting, flavour mashup discovery", "zh-Hant": "趨勢預測，發掘不同混合新口味", "zh-Hans": "趋势预测，发掘不同混合新口味" },
@@ -27,6 +32,7 @@ const personas = {
 	},
 	content: {
 		mascot: "COCO Q",
+		art: "assets/Carnival_Daredevil_PersonaCard_SELFIESTAR.png",
 		title: { en: "Selfie Star", "zh-Hant": "Selfie Star", "zh-Hans": "Selfie Star" },
 		tagline: { en: "Aesthetic Curator & Creator", "zh-Hant": "靚相創作人", "zh-Hans": "镜头捕捉者" },
 		power: { en: "Visual storytelling, neon framing mastery", "zh-Hant": "用視覺說故事，大師級霓虹燈光拍照技術", "zh-Hans": "用美学视觉说故事，大师级打卡包出片" },
@@ -67,6 +73,7 @@ const messages = {
 		personaLabel: "Your Official Persona", superpower: "Superpower:", mission: "Mission:",
 		personaScore: "Dominant Letter: Mostly {letter} · {score} out of 5 answers",
 		primaryArchetype: "Primary Archetype",
+		saving: "Saving…", saveError: "We couldn't save your answers. Please try again.",
 	},
 	"zh-Hant": {
 		appTitle: "友邦嘉年華｜新一代個性探索",
@@ -101,6 +108,7 @@ const messages = {
 		personaLabel: "官方粉絲類型", primaryArchetype: "主類型",
 		superpower: "超能力：", mission: "任務：",
 		personaScore: "最多字母：主要是{letter} · {score}/5",
+		saving: "正在儲存…", saveError: "未能儲存你的答案，請再試一次。",
 	},
 	"zh-Hans": {
 		appTitle: "友邦嘉年华｜新一代个性探索",
@@ -135,8 +143,19 @@ const messages = {
 		personaLabel: "官方粉丝类型", primaryArchetype: "主类型",
 		superpower: "超能力：", mission: "任务：",
 		personaScore: "最多字母：主要是{letter} · {score}/5",
+		saving: "正在保存…", saveError: "未能保存你的答案，请重试。",
 	},
 };
+
+function createSubmissionId() {
+	if (crypto.randomUUID) return crypto.randomUUID();
+
+	const bytes = crypto.getRandomValues(new Uint8Array(16));
+	bytes[6] = (bytes[6] & 0x0f) | 0x40;
+	bytes[8] = (bytes[8] & 0x3f) | 0x80;
+	const hex = [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+	return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
 
 function applyLocale(locale) {
 	activeLocale = locale;
@@ -166,6 +185,10 @@ function applyLocale(locale) {
 document.querySelector(".language-options").addEventListener("click", (event) => {
 	const button = event.target.closest("[data-locale]");
 	if (!button) return;
+	if (submissionStarted && button.dataset.locale !== activeLocale) {
+		submissionId = createSubmissionId();
+		submissionStarted = false;
+	}
 	applyLocale(button.dataset.locale);
 	document.querySelector(".language-picker").open = false;
 });
@@ -217,8 +240,23 @@ function isCurrentAnswerValid() {
 	return false;
 }
 
-function showPersona() {
-	const answers = questions.map((question) => getSelectedCategory(question.querySelector(".question-form")));
+function showPersona(result = calculatePersona(questions.map((question) => getSelectedCategory(question.querySelector(".question-form"))))) {
+	const persona = personas[result.category];
+	const artwork = document.querySelector(".persona-art");
+
+	artwork.src = persona.art;
+	artwork.alt = `${persona.mascot} ${persona.title[activeLocale]} persona card`;
+	document.querySelector("[data-persona-mascot]").textContent = persona.mascot;
+	document.querySelector("[data-persona-title]").textContent = persona.title[activeLocale];
+	document.querySelector("[data-persona-tagline]").textContent = persona.tagline[activeLocale];
+	document.querySelector("[data-persona-power]").textContent = persona.power[activeLocale];
+	document.querySelector("[data-persona-mission]").textContent = persona.mission[activeLocale];
+	document.querySelector("[data-persona-score]").textContent = messages[activeLocale].personaScore
+		.replace("{letter}", result.dominantLetter)
+		.replace("{score}", result.score);
+}
+
+function calculatePersona(answers) {
 	const scores = Object.fromEntries(Object.keys(personas).map((category) => [category, 0]));
 	answers.forEach((category) => {
 		scores[category] += 1;
@@ -230,34 +268,56 @@ function showPersona() {
 	const category = leadingCategories.includes(finalAnswer)
 		? finalAnswer
 		: [...answers].reverse().find((answer) => leadingCategories.includes(answer));
-	const persona = personas[category];
-	const letter = { thrill: "A", games: "B", food: "C", content: "D" }[category];
 
-	document.querySelector("[data-persona-mascot]").textContent = persona.mascot;
-	document.querySelector("[data-persona-title]").textContent = persona.title[activeLocale];
-	document.querySelector("[data-persona-tagline]").textContent = persona.tagline[activeLocale];
-	document.querySelector("[data-persona-power]").textContent = persona.power[activeLocale];
-	document.querySelector("[data-persona-mission]").textContent = persona.mission[activeLocale];
-	document.querySelector("[data-persona-score]").textContent = messages[activeLocale].personaScore
-		.replace("{letter}", letter)
-		.replace("{score}", highestScore);
+	return {
+		category,
+		score: highestScore,
+		dominantLetter: { thrill: "A", games: "B", food: "C", content: "D" }[category],
+	};
+}
+
+async function submitQuiz() {
+	const answers = questions.map((question) => getSelectedCategory(question.querySelector(".question-form")));
+	submissionStarted = true;
+	const response = await fetch("/api/quiz-submissions", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ submissionId, answers, locale: activeLocale }),
+	});
+
+	if (!response.ok) throw new Error(`Quiz submission failed with status ${response.status}`);
+	const result = await response.json();
+	if (!personas[result.persona] || !Number.isInteger(result.score) || !["A", "B", "C", "D"].includes(result.dominantLetter)) {
+		throw new Error("Quiz submission returned an invalid result");
+	}
+	return { category: result.persona, score: result.score, dominantLetter: result.dominantLetter };
 }
 
 document.addEventListener("change", (event) => {
 	const input = event.target;
 	if (!(input instanceof HTMLInputElement) || input.type !== "radio") return;
+	if (submissionStarted) {
+		submissionId = createSubmissionId();
+		submissionStarted = false;
+	}
 	input.closest(".question-form").querySelector(".question-error").hidden = true;
 });
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
 	const actionButton = event.target.closest("[data-action]");
 	if (!actionButton) return;
 
 	switch (actionButton.dataset.action) {
 		case "start":
+			submissionId = createSubmissionId();
+			submissionStarted = false;
 			showScreen("question", 0);
 			break;
 		case "back":
+			if (submissionStarted) {
+				submissionId = createSubmissionId();
+				submissionStarted = false;
+			}
 			showScreen("question", Math.max(0, activeQuestion - 1));
 			break;
 		case "next":
@@ -266,11 +326,27 @@ document.addEventListener("click", (event) => {
 			break;
 		case "result":
 			if (!isCurrentAnswerValid()) break;
-			showPersona();
-			showScreen("result");
-			document.querySelector("#persona-name").focus({ preventScroll: true });
+			actionButton.disabled = true;
+			actionButton.textContent = messages[activeLocale].saving;
+			const saveError = document.querySelector(".submission-error");
+			saveError.hidden = true;
+			try {
+				const result = await submitQuiz();
+				showPersona(result);
+				showScreen("result");
+				document.querySelector("#persona-name").focus({ preventScroll: true });
+			} catch (error) {
+				console.error("Could not save quiz submission.", error);
+				saveError.textContent = messages[activeLocale].saveError;
+				saveError.hidden = false;
+			} finally {
+				actionButton.disabled = false;
+				actionButton.textContent = messages[activeLocale].viewPersona;
+			}
 			break;
 		case "result-back":
+			submissionId = createSubmissionId();
+			submissionStarted = false;
 			showScreen("question", questions.length - 1);
 			break;
 		case "retry":
@@ -278,6 +354,9 @@ document.addEventListener("click", (event) => {
 				form.reset();
 				form.querySelector(".question-error").hidden = true;
 			});
+			document.querySelector(".submission-error").hidden = true;
+			submissionId = createSubmissionId();
+			submissionStarted = false;
 			showScreen("intro");
 			break;
 	}

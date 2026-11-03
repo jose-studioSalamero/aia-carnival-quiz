@@ -309,6 +309,11 @@ button {
 	transform: translateY(1px);
 }
 
+.button:disabled {
+	cursor: wait;
+	opacity: 0.7;
+}
+
 .button:focus-visible,
 .social-card:focus-visible {
 	outline: 3px solid var(--carnival-white);
@@ -416,6 +421,18 @@ button {
 }
 
 .question-error[hidden] {
+	display: none;
+}
+
+.submission-error {
+	margin: 16px 0 0;
+	color: var(--carnival-white);
+	font-size: 14px;
+	font-weight: 700;
+	text-align: right;
+}
+
+.submission-error[hidden] {
 	display: none;
 }
 
