@@ -4,6 +4,8 @@
 
 Quiz answers are submitted to `/api/quiz-submissions` and stored in Supabase. Each row contains the five selected answer categories, the UI locale, the server-calculated persona, and a database-generated timestamp. The submission UUID is used for idempotent retries. No identity or contact information is collected.
 
+The intro page includes a mailing-list form placeholder and a skip option. The form does not currently send or store email addresses; connect it to Mailchimp before collecting sign-ups.
+
 ### Supabase setup
 
 1. Create a Supabase project and open its SQL Editor.

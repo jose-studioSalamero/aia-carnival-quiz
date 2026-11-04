@@ -284,6 +284,13 @@ button {
 	line-height: 1;
 }
 
+.qr-codes-link {
+	display: inline-block;
+	margin-top: 12px;
+	color: var(--carnival-white);
+	font-size: 13px;
+}
+
 .button {
 	min-height: 48px;
 	padding: 10px 22px;
@@ -315,7 +322,8 @@ button {
 }
 
 .button:focus-visible,
-.social-card:focus-visible {
+.social-card:focus-visible,
+.qr-codes-link:focus-visible {
 	outline: 3px solid var(--carnival-white);
 	outline-offset: 4px;
 }
@@ -329,10 +337,6 @@ button {
 	border-color: var(--carnival-white);
 	background: transparent;
 	color: var(--carnival-white);
-}
-
-.intro-start {
-	min-width: 125px;
 }
 
 .question-screen {
@@ -738,15 +742,6 @@ button {
 
 	.social-card {
 		padding: 6px 6px 8px;
-	}
-
-	.social-label {
-		gap: 4px;
-		font-size: 11px;
-	}
-
-	.social-label-hk {
-		font-size: 10px;
 	}
 
 	.question-screen {
