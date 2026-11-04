@@ -47,10 +47,11 @@ const messages = {
 		introTitleFirst: "Next-Gen Persona Check",
 		introWelcome: "Welcome! We are scouting the next wave of fans to join us at the AIA Carnival.",
 		introInstructions: "Answer the questions to unlock your official fan persona.",
-		socialTitle: "First follow us on social media",
-		instagramLabel: "Instagram", rednoteName: "RedNote",
-		instagramAlt: "Instagram QR code", rednoteAlt: "RedNote QR code",
-		qrCodesLink: "Link to QR Codes", start: "Start Now",
+		mailingListTitle: "Join our mailing list",
+		nameLabel: "Name", namePlaceholder: "Your name",
+		emailLabel: "Email address", emailPlaceholder: "you@example.com",
+		emailSubmit: "Submit", skip: "Skip",
+		emailNotConnected: "Mailing list sign-up isn't connected yet. Please use Skip to continue.",
 		section1: "1. Opening Protocol", section2: "2. Resource Allocation Test",
 		section3: "3. Energy & Refuel Strategy", section4: "4. The Ultimate KPI",
 		section5: "5. Closing Interview Pitch",
@@ -83,10 +84,11 @@ const messages = {
 		introTitleFirst: "新一代個性探索",
 		introWelcome: "歡迎！我們正在尋找新一批粉絲加入友邦嘉年華。",
 		introInstructions: "回答以下問題，以了解你是屬於哪一類型的嘉年華粉絲。",
-		socialTitle: "首先，追蹤我們的社交媒體",
-		instagramLabel: "IG", rednoteName: "小紅書",
-		instagramAlt: "Instagram 二維碼", rednoteAlt: "小紅書二維碼",
-		qrCodesLink: "QR Code 連結", start: "立即開始",
+		mailingListTitle: "訂閱嘉年華郵件列表",
+		nameLabel: "姓名", namePlaceholder: "你的姓名",
+		emailLabel: "電郵地址", emailPlaceholder: "you@example.com",
+		emailSubmit: "提交", skip: "略過",
+		emailNotConnected: "郵件列表功能尚未連接，請按「略過」繼續。",
 		section1: "入場前準備事項", section2: "2：資源分配題",
 		section3: "3：補充能量策略", section4: "4：終極KPI", section5: "5：最後總結",
 		question1: "您已進入友邦嘉年華，第一件事會做什麼？",
@@ -120,10 +122,11 @@ const messages = {
 		introTitleFirst: "新一代个性探索",
 		introWelcome: "欢迎！我们正在寻找新一批粉丝加入友邦嘉年华。",
 		introInstructions: "回答以下问题，以了解你是属于哪一类型的嘉年华粉丝。",
-		socialTitle: "首先，关注我们的社交媒体",
-		instagramLabel: "IG", rednoteName: "小红书",
-		instagramAlt: "Instagram 二维码", rednoteAlt: "小红书二维码",
-		qrCodesLink: "二维码链接", start: "立即开始",
+		mailingListTitle: "订阅嘉年华邮件列表",
+		nameLabel: "姓名", namePlaceholder: "你的姓名",
+		emailLabel: "邮箱地址", emailPlaceholder: "you@example.com",
+		emailSubmit: "提交", skip: "跳过",
+		emailNotConnected: "邮件列表功能尚未连接，请点击“跳过”继续。",
 		section1: "入场前准备事项", section2: "2：资源分配题",
 		section3: "3：补充能量策略", section4: "4：终极KPI", section5: "5：最后总结",
 		question1: "您已进入友邦嘉年华，首先会做什么？",
@@ -200,6 +203,17 @@ document.querySelector(".language-options").addEventListener("click", (event) =>
 	}
 	applyLocale(button.dataset.locale);
 	document.querySelector(".language-picker").open = false;
+});
+
+document.querySelector(".mailing-list-form").addEventListener("submit", (event) => {
+	event.preventDefault();
+	const status = document.querySelector(".mailing-list-status");
+	status.textContent = messages[activeLocale].emailNotConnected;
+	status.hidden = false;
+});
+
+document.querySelector(".mailing-list-form").addEventListener("input", () => {
+	document.querySelector(".mailing-list-status").hidden = true;
 });
 
 function showScreen(name, questionIndex = activeQuestion) {

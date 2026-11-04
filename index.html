@@ -42,22 +42,21 @@
 					<p><span data-i18n="introWelcome">Welcome! We are scouting the next wave of fans to join us at the AIA Carnival.</span><br class="desktop-break"> <span data-i18n="introInstructions">Answer the questions to unlock your official fan persona.</span></p>
 				</header>
 
-				<section class="social-section" aria-labelledby="social-title">
-					<h2 id="social-title" data-i18n="socialTitle">First follow us on social media</h2>
-					<div class="social-cards">
-						<a class="social-card" href="https://www.instagram.com/aiacarnival/" target="_blank" rel="noreferrer">
-							<img class="qr-code" src="assets/instagram-qr.png" alt="Instagram QR code" data-i18n-alt="instagramAlt">
-							<span class="social-label"><span class="instagram-mark" aria-hidden="true">◎</span> <span data-i18n="instagramLabel">Instagram</span></span>
-						</a>
-						<a class="social-card" href="https://www.xiaohongshu.com/search_result?keyword=%E5%8F%8B%E9%82%A6%E5%98%89%E5%B9%B4%E5%8D%8E" target="_blank" rel="noreferrer">
-							<img class="qr-code" src="assets/xiaohongshu-qr.png" alt="RedNote QR code" data-i18n-alt="rednoteAlt">
-							<span class="social-label social-label-hk"><span data-i18n="rednoteName">RedNote</span></span>
-						</a>
-					</div>
-					<a class="qr-codes-link" href="https://www.dropbox.com/scl/fo/gr5rcka036nz1d00rj7gq/AIjq8PqoN5VszrvkI2d15h8?rlkey=mmr6nvg6c5i8zurdlvvcifmtj&amp;st=lj0in4c4&amp;dl=0" target="_blank" rel="noreferrer" data-i18n="qrCodesLink">Link to QR Codes</a>
+				<section class="mailing-list-section" aria-labelledby="mailing-list-title">
+					<h2 id="mailing-list-title" data-i18n="mailingListTitle">Join our mailing list</h2>
+					<form class="mailing-list-form">
+						<label for="mailing-list-name" data-i18n="nameLabel">Name</label>
+						<input id="mailing-list-name" name="name" type="text" autocomplete="name" placeholder="Your name" data-i18n-placeholder="namePlaceholder" required>
+						<label for="mailing-list-email" data-i18n="emailLabel">Email address</label>
+						<input id="mailing-list-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" data-i18n-placeholder="emailPlaceholder" required>
+						<p class="mailing-list-note" data-i18n="emailNotConnected">Mailing list sign-up isn't connected yet. Please use Skip to continue.</p>
+						<p class="mailing-list-status" role="status" aria-live="polite" hidden></p>
+						<div class="intro-actions">
+							<button class="button button-primary" type="submit" data-i18n="emailSubmit">Submit</button>
+							<button class="button button-secondary" type="button" data-action="start" data-i18n="skip">Skip</button>
+						</div>
+					</form>
 				</section>
-
-				<button class="button button-primary intro-start" type="button" data-action="start" data-i18n="start">Start Now</button>
 			</section>
 
 			<section class="panel question-screen" data-screen="question" data-step="0" aria-labelledby="question-1-title" hidden>
