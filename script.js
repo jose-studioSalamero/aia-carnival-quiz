@@ -52,9 +52,9 @@ const messages = {
 		emailLabel: "Email address", emailPlaceholder: "you@example.com",
 		emailSubmit: "Submit", skip: "Skip",
 		emailNotConnected: "Mailing list sign-up isn't connected yet. Please use Skip to continue.",
-		section1: "1. Opening Protocol", section2: "2. Resource Allocation Test",
-		section3: "3. Energy & Refuel Strategy", section4: "4. The Ultimate KPI",
-		section5: "5. Closing Interview Pitch",
+		section1: "1. Opening Protocol", section2: "2: Resource Allocation Test",
+		section3: "3: Energy & Refuel Strategy", section4: "4: The Ultimate KPI",
+		section5: "5: Closing Interview Pitch",
 		question1: "You’ve entered the AIA Carnival. What’s your first move?",
 		q1a: "A) Head straight for the fastest ride.", q1b: "B) Find the best game and plan your prize win.",
 		q1c: "C) Hunt down the must-try food.", q1d: "D) Find the perfect selfie spot.",
@@ -73,7 +73,7 @@ const messages = {
 		validation: "Please choose an answer to continue.", step: "Step {step}/5",
 		back: "Back", next: "Next", viewPersona: "View My Persona", retry: "Try Again",
 		personaLabel: "Your Official Persona", superpower: "Superpower:", mission: "Mission:",
-		personaScore: "Dominant Letter: Mostly {letter} · {score} out of 5 answers",
+		personaScore: "Dominant Letter: Mostly {letter}",
 		primaryArchetype: "Primary Archetype",
 		saving: "Saving…", saveError: "We couldn't save your answers. Please try again.",
 		artworkError: "We couldn't load your persona card. Please try again.",
@@ -95,12 +95,12 @@ const messages = {
 		q1a: "A) 直衝去最刺激的機動遊戲。", q1b: "B) 找最好玩的攤位遊戲並計劃贏取心水獎品。",
 		q1c: "C) 尋找必食美食。", q1d: "D) 尋找完美的自拍位置。",
 		question2: "你有$200，並且還有30分鐘才到高峰時間。你的計劃是什麼？",
-		q2a: "A) 盡力玩盡機動遊戲。", q2b: "B) 選擇獎品最好的攤位遊戲。",
+		q2a: "A) 盡力玩盡機動遊樂。", q2b: "B) 選擇獎品最好的攤位遊戲。",
 		q2c: "C) 食盡所有嘉年華小食。", q2d: "D) 找出最佳打卡位放上社交媒體。",
 		question3: "已是晚上7點，你需要補充能量。你會選擇什麼？",
 		q3a: "A) 喝杯咖啡，然後繼續玩機動遊戲。", q3b: "B) 在玩不同攤位遊戲之間吃點簡單小食。",
 		q3c: "C) 食一餐包含所有最愛的街頭美食盛宴。", q3d: "D) 品嚐最上鏡美食。",
-		question4: "什麼能證明你在嘉年華的體驗是成功的？",
+		question4: "建議：什麼能決定你在嘉年華的體驗是成功的？",
 		q4a: "A) 機動遊戲數量：體驗四個或以上刺激的機動遊戲。",
 		q4b: "B) 獎品收穫：一個巨型毛公仔。", q4c: "C) 美食指數：嘗試五個或以上的美食。",
 		q4d: "D) 內容分數：一篇貼文、一段Reel影片和一些夜景人像。",
@@ -112,7 +112,7 @@ const messages = {
 		back: "返回", next: "下一題", viewPersona: "查看我的角色", retry: "再玩一次",
 		personaLabel: "官方粉絲類型", primaryArchetype: "主類型",
 		superpower: "超能力：", mission: "任務：",
-		personaScore: "最多字母：主要是{letter} · {score}/5",
+		personaScore: "最多字母：主要是{letter}",
 		saving: "正在儲存…", saveError: "未能儲存你的答案，請再試一次。",
 		artworkError: "未能載入你的角色卡，請再試一次。",
 	},
@@ -138,7 +138,7 @@ const messages = {
 		question3: "已是晚上7点，你需要补充能量。你会选择什么？",
 		q3a: "A) 喝杯咖啡，然后继续玩机动游戏。", q3b: "B) 在玩不同摊位游戏之间吃点简单小吃。",
 		q3c: "C) 一顿饱餐，品尝所有最爱的街头美食。", q3d: "D) 品尝最出片的美食。",
-		question4: "什么能证明你在嘉年华的体验是成功的？",
+		question4: "建议：什么能证明你在嘉年华的体验是成功的？",
 		q4a: "A) 机动游戏数量：体验四个或以上刺激的机动游戏。",
 		q4b: "B) 奖品收获：一个巨型毛公仔。", q4c: "C) 美食指数：尝试五个或以上的美食。",
 		q4d: "D) 出片质量：一篇贴文、一段vlog影片和一些夜景人像。",
@@ -150,7 +150,7 @@ const messages = {
 		back: "返回", next: "下一题", viewPersona: "查看我的角色", retry: "再玩一次",
 		personaLabel: "官方粉丝类型", primaryArchetype: "主类型",
 		superpower: "超能力：", mission: "任务：",
-		personaScore: "最多字母：主要是{letter} · {score}/5",
+		personaScore: "最多字母：主要是{letter}",
 		saving: "正在保存…", saveError: "未能保存你的答案，请重试。",
 		artworkError: "未能加载你的角色卡，请重试。",
 	},
@@ -282,8 +282,7 @@ function showPersona(result = calculatePersona(questions.map((question) => getSe
 	document.querySelector("[data-persona-power]").textContent = persona.power[activeLocale];
 	document.querySelector("[data-persona-mission]").textContent = persona.mission[activeLocale];
 	document.querySelector("[data-persona-score]").textContent = messages[activeLocale].personaScore
-		.replace("{letter}", result.dominantLetter)
-		.replace("{score}", result.score);
+		.replace("{letter}", result.dominantLetter);
 }
 
 function calculatePersona(answers) {

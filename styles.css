@@ -216,11 +216,11 @@ button {
 	line-height: 1.5;
 }
 
-.mailing-list-section {
+.social-section {
 	width: 100%;
 }
 
-.mailing-list-section h2 {
+.social-section h2 {
 	margin: 0 0 16px;
 	color: var(--carnival-purple);
 	font-size: 24px;
@@ -228,56 +228,67 @@ button {
 	line-height: 1.2;
 }
 
-.mailing-list-form {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
-.mailing-list-form label {
-	color: var(--carnival-purple);
-	font-size: 14px;
-	font-weight: 700;
-	text-align: left;
-}
-
-.mailing-list-form input {
-	width: 100%;
-	min-height: 48px;
-	padding: 10px 12px;
-	border: 3px solid var(--carnival-white);
-	border-radius: 0;
-	background: var(--carnival-white);
-	color: #000;
-	font-size: 16px;
-}
-
-.mailing-list-form input:focus-visible {
-	outline: 3px solid var(--carnival-yellow);
-	outline-offset: 3px;
-}
-
-.mailing-list-note,
-.mailing-list-status {
-	margin: 0;
-	font-size: 13px;
-	line-height: 1.45;
-	text-align: left;
-}
-
-.mailing-list-status {
-	font-weight: 700;
-}
-
-.mailing-list-status[hidden] {
-	display: none;
-}
-
-.intro-actions {
+.social-cards {
 	display: flex;
 	justify-content: center;
-	flex-wrap: wrap;
-	gap: 12px;
+	gap: 32px;
+}
+
+.social-card {
+	min-width: 0;
+	width: 50%;
+	max-width: 185px;
+	padding: 8px 8px 10px;
+	border: 3px solid var(--carnival-white);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	color: var(--carnival-white);
+	text-decoration: none;
+	transition: background-color 140ms ease, transform 140ms ease;
+}
+
+.social-card:hover {
+	background: rgba(255, 255, 255, 0.12);
+	transform: translateY(-2px);
+}
+
+.qr-code {
+	display: block;
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: contain;
+	background: white;
+}
+
+.social-label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-height: 24px;
+	font-family: "Righteous", sans-serif;
+	font-size: 13px;
+	white-space: nowrap;
+}
+
+.social-label-hk {
+	font-family: "Noto Sans HK", "Figtree", sans-serif;
+	font-size: 12px;
+}
+
+.instagram-mark {
+	font-family: sans-serif;
+	font-size: 20px;
+	line-height: 1;
+}
+
+.qr-codes-link {
+	display: inline-block;
+	margin-top: 12px;
+	color: var(--carnival-white);
+	font-size: 13px;
 }
 
 .button {
@@ -310,7 +321,9 @@ button {
 	opacity: 0.7;
 }
 
-.button:focus-visible {
+.button:focus-visible,
+.social-card:focus-visible,
+.qr-codes-link:focus-visible {
 	outline: 3px solid var(--carnival-white);
 	outline-offset: 4px;
 }
@@ -719,12 +732,16 @@ button {
 		font-size: 36px;
 	}
 
-	.mailing-list-section h2 {
+	.social-section h2 {
 		font-size: 20px;
 	}
 
-	.intro-actions {
-		gap: 8px;
+	.social-cards {
+		gap: 12px;
+	}
+
+	.social-card {
+		padding: 6px 6px 8px;
 	}
 
 	.question-screen {
