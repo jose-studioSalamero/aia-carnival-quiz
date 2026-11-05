@@ -10,33 +10,21 @@ const personas = {
 		mascot: "ZIPPY CAPPY",
 		art: "assets/Carnival_Daredevil_PersonaCard_DAREDEVIL.png",
 		title: { en: "Daredevil", "zh-Hant": "速度冒險家", "zh-Hans": "极速冒险家" },
-		tagline: { en: "High-Velocity Thrill-Seeker", "zh-Hant": "極速冒險王", "zh-Hans": "极速冒险王" },
-		power: { en: "Unmatched endurance, fearless coaster energy", "zh-Hant": "無比耐力，無懼過山車能量", "zh-Hans": "无比耐力，无惧过山车能量" },
-		mission: { en: "Set the standard for maximising ride pacing, conquer every new attraction", "zh-Hant": "定立機動遊戲節奏控制的指標，征服每個新項目。", "zh-Hans": "设定机动游戏节奏控制的指标，征服每个新项目。" },
 	},
 	games: {
 		mascot: "ROBO-C12",
 		art: "assets/Carnival_Daredevil_PersonaCard_GAMEMVP.png",
 		title: { en: "Game MVP", "zh-Hant": "攤位遊戲達人", "zh-Hans": "摊位游戏达人" },
-		tagline: { en: "Precision Game Strategist", "zh-Hant": "遊戲策略家", "zh-Hans": "游戏策略家" },
-		power: { en: "Physics mastery, token ROI optimization", "zh-Hant": "精通物理學及代幣投資回報率", "zh-Hans": "精通物理学及代币投资回报率" },
-		mission: { en: "Crack the physics behind the games. Turn tokens into huge prize hauls.", "zh-Hant": "探究攤位遊戲背後的物理原理，將代幣兌換成豐富獎品。", "zh-Hans": "观察摊位游戏背后的物理原理，将代币兑换成丰富奖品。" },
 	},
 	food: {
 		mascot: "VIOLET",
 		art: "assets/Carnival_Daredevil_PersonaCard_CERTRIFIEDFOODIE.png",
 		title: { en: "Certified Foodie", "zh-Hant": "美食家", "zh-Hans": "美食家" },
-		tagline: { en: "Culinary Explorer & Foodie", "zh-Hant": "美食獵人", "zh-Hans": "美食猎人" },
-		power: { en: "Trend forecasting, flavour mashup discovery", "zh-Hant": "趨勢預測，發掘不同混合新口味", "zh-Hans": "趋势预测，发掘不同混合新口味" },
-		mission: { en: "Seek out culinary special treats and secret carnival snack combos.", "zh-Hant": "尋找特色美食和隱藏的嘉年華小食組合。", "zh-Hans": "寻找特色美食和隐藏的嘉年华小吃组合。" },
 	},
 	content: {
 		mascot: "COCO Q",
 		art: "assets/Carnival_Daredevil_PersonaCard_SELFIESTAR.png",
 		title: { en: "Selfie Star", "zh-Hant": "自拍王", "zh-Hans": "出片王" },
-		tagline: { en: "Aesthetic Curator & Creator", "zh-Hant": "靚相創作人", "zh-Hans": "镜头捕捉者" },
-		power: { en: "Visual storytelling, neon framing mastery", "zh-Hant": "用視覺說故事，大師級霓虹燈光拍照技術", "zh-Hans": "用美学视觉说故事，大师级打卡包出片" },
-		mission: { en: "Turn every photo op and candid laugh into top-tier content that defines the carnival aesthetic.", "zh-Hant": "將每一次拍照機會和每一次真情流露的笑聲轉化為定義嘉年華美學的頂級內容。", "zh-Hans": "将每一次拍照机会和每一次真情流露的笑声转化为定义嘉年华美学的顶级内容。" },
 	},
 };
 
@@ -72,9 +60,7 @@ const messages = {
 		q5c: "C) I discover and celebrate the best flavours.", q5d: "D) I create content that brings the Carnival to life.",
 		validation: "Please choose an answer to continue.", step: "Step {step}/5",
 		back: "Back", next: "Next", viewPersona: "View My Persona", retry: "Try Again",
-		personaLabel: "Your Official Persona", superpower: "Superpower:", mission: "Mission:",
-		personaScore: "Dominant Letter: Mostly {letter}",
-		primaryArchetype: "Primary Archetype",
+		personaLabel: "Your Official Persona",
 		saving: "Saving…", saveError: "We couldn't save your answers. Please try again.",
 		artworkError: "We couldn't load your persona card. Please try again.",
 	},
@@ -110,9 +96,7 @@ const messages = {
 		q5d: "D) 我製作的內容能令嘉年華充滿無限歡樂。",
 		validation: "請選擇一個答案以繼續。", step: "第 {step}/5 題",
 		back: "返回", next: "下一題", viewPersona: "查看我的角色", retry: "再玩一次",
-		personaLabel: "官方粉絲類型", primaryArchetype: "主類型",
-		superpower: "超能力：", mission: "任務：",
-		personaScore: "最多字母：主要是{letter}",
+		personaLabel: "官方粉絲類型",
 		saving: "正在儲存…", saveError: "未能儲存你的答案，請再試一次。",
 		artworkError: "未能載入你的角色卡，請再試一次。",
 	},
@@ -148,9 +132,7 @@ const messages = {
 		q5d: "D) 我发布的社媒内容能令嘉年华更生动欢乐。",
 		validation: "请选择一个答案以继续。", step: "第 {step}/5 题",
 		back: "返回", next: "下一题", viewPersona: "查看我的角色", retry: "再玩一次",
-		personaLabel: "官方粉丝类型", primaryArchetype: "主类型",
-		superpower: "超能力：", mission: "任务：",
-		personaScore: "最多字母：主要是{letter}",
+		personaLabel: "官方粉丝类型",
 		saving: "正在保存…", saveError: "未能保存你的答案，请重试。",
 		artworkError: "未能加载你的角色卡，请重试。",
 	},
@@ -278,11 +260,6 @@ function showPersona(result = calculatePersona(questions.map((question) => getSe
 	artwork.dataset.loaded = "true";
 	document.querySelector("[data-persona-mascot]").textContent = persona.mascot;
 	document.querySelector("[data-persona-title]").textContent = persona.title[activeLocale];
-	document.querySelector("[data-persona-tagline]").textContent = persona.tagline[activeLocale];
-	document.querySelector("[data-persona-power]").textContent = persona.power[activeLocale];
-	document.querySelector("[data-persona-mission]").textContent = persona.mission[activeLocale];
-	document.querySelector("[data-persona-score]").textContent = messages[activeLocale].personaScore
-		.replace("{letter}", result.dominantLetter);
 }
 
 function calculatePersona(answers) {
@@ -300,8 +277,6 @@ function calculatePersona(answers) {
 
 	return {
 		category,
-		score: highestScore,
-		dominantLetter: { thrill: "A", games: "B", food: "C", content: "D" }[category],
 	};
 }
 
@@ -316,10 +291,10 @@ async function submitQuiz() {
 
 	if (!response.ok) throw new Error(`Quiz submission failed with status ${response.status}`);
 	const result = await response.json();
-	if (!personas[result.persona] || !Number.isInteger(result.score) || !["A", "B", "C", "D"].includes(result.dominantLetter)) {
+	if (!personas[result.persona]) {
 		throw new Error("Quiz submission returned an invalid result");
 	}
-	return { category: result.persona, score: result.score, dominantLetter: result.dominantLetter };
+	return { category: result.persona };
 }
 
 document.addEventListener("change", (event) => {
