@@ -290,34 +290,61 @@ document.querySelector(".mailing-list-form").addEventListener("input", () => {
 document.querySelector(".mailing-list-status").hidden = true;
 });
 
-function showScreen(name, questionIndex = activeQuestion) {
-screens.forEach((screen) => {
-	const isActive = screen.dataset.screen === name
-		&& (name !== "question" || Number(screen.dataset.step) === questionIndex);
-	screen.hidden = !isActive;
-	screen.classList.toggle("is-active", isActive);
-});
+function fadeOutScreen(screen) {
+	return new Promise((resolve) => {
+		screen.classList.add("is-fading");
+		const finish = () => {
+			screen.removeEventListener("transitionend", finish);
+			resolve();
+		};
+		screen.addEventListener("transitionend", finish);
+		setTimeout(finish, 350); // safety fallback if transitionend doesn't fire
+	});
+}
 
-if (name === "question") {
-	activeQuestion = questionIndex;
-	const currentScreen = questions.find((screen) => Number(screen.dataset.step) === activeQuestion);
-	const progressSteps = currentScreen.querySelectorAll("[data-progress-step]");
+async function showScreen(name, questionIndex = activeQuestion) {
+	const currentScreen = screens.find((screen) => screen.classList.contains("is-active"));
 
-	progressSteps.forEach((step, index) => {
-		const stepNumber = step.querySelector("span");
-		const isComplete = index < activeQuestion;
-		step.classList.toggle("is-current", index === activeQuestion);
-		step.classList.toggle("is-complete", isComplete);
-		stepNumber.textContent = isComplete ? "✓" : String(index + 1);
-		if (index === activeQuestion) {
-			step.setAttribute("aria-current", "step");
-		} else {
-			step.removeAttribute("aria-current");
-		}
+	if (currentScreen) {
+		await fadeOutScreen(currentScreen);
+	}
+
+	screens.forEach((screen) => {
+		const isActive = screen.dataset.screen === name
+			&& (name !== "question" || Number(screen.dataset.step) === questionIndex);
+		screen.classList.toggle("is-active", isActive);
+		screen.classList.remove("is-fading");
+		screen.hidden = !isActive;
+		if (isActive) screen.classList.add("is-fading"); // start transparent, ready to fade in
 	});
 
-	currentScreen.querySelector("legend").focus({ preventScroll: true });
-}
+	if (name === "question") {
+		activeQuestion = questionIndex;
+		const currentScreen = questions.find((screen) => Number(screen.dataset.step) === activeQuestion);
+		const progressSteps = currentScreen.querySelectorAll("[data-progress-step]");
+
+		progressSteps.forEach((step, index) => {
+			const stepNumber = step.querySelector("span");
+			const isComplete = index < activeQuestion;
+			step.classList.toggle("is-current", index === activeQuestion);
+			step.classList.toggle("is-complete", isComplete);
+			stepNumber.textContent = isComplete ? "✓" : String(index + 1);
+			if (index === activeQuestion) {
+				step.setAttribute("aria-current", "step");
+			} else {
+				step.removeAttribute("aria-current");
+			}
+		});
+
+		currentScreen.querySelector("legend").focus({ preventScroll: true });
+	}
+
+	const newScreen = screens.find((screen) => screen.classList.contains("is-active"));
+	requestAnimationFrame(() => {
+		requestAnimationFrame(() => {
+			newScreen?.classList.remove("is-fading"); // triggers the fade-in transition
+		});
+	});
 }
 
 function getSelectedCategory(form) {

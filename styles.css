@@ -733,3 +733,12 @@ html[lang^="zh"] .desktop-break {
 		transition-duration: 0.01ms !important;
 	}
 }
+
+.panel {
+	transition: opacity 0.3s ease;
+	opacity: 1;
+}
+
+.panel.is-fading {
+	opacity: 0;
+}
