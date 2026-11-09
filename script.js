@@ -262,22 +262,28 @@ document.querySelector(".language-picker").open = false;
 let subscriber = null; // becomes { name, email } once someone signs up
 
 document.querySelector(".mailing-list-form").addEventListener("submit", async (event) => {
-event.preventDefault();
-const form = event.currentTarget;
-const status = document.querySelector(".mailing-list-status");
-const name = form.querySelector('[name="name"]').value.trim();
-const email = form.querySelector('[name="email"]').value.trim();
+	event.preventDefault();
+	const form = event.currentTarget;
+	const status = document.querySelector(".mailing-list-status");
+	const name = form.querySelector('[name="name"]').value.trim();
+	const email = form.querySelector('[name="email"]').value.trim();
 
-subscriber = { name, email };
+	subscriber = { name, email };
 
-try {
-	await sendOrQueue("/api/subscribe", { email, name, locale: activeLocale });
-} catch (error) {
-	console.warn("Subscribe request queued (likely offline).", error);
-}
+	try {
+		await sendOrQueue("/api/subscribe", { email, name, locale: activeLocale });
+	} catch (error) {
+		console.warn("Subscribe request queued (likely offline).", error);
+	}
 
-status.textContent = messages[activeLocale].subscribeSuccess;
-status.hidden = false;
+	status.textContent = messages[activeLocale].subscribeSuccess;
+	status.hidden = false;
+
+	setTimeout(() => {
+		submissionId = createSubmissionId();
+		submissionStarted = false;
+		showScreen("question", 0);
+	}, 900); // let them see the "Thanks!" message briefly
 });
 
 document.querySelector(".mailing-list-form").addEventListener("input", () => {
