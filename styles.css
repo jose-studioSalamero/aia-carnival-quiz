@@ -742,3 +742,41 @@ html[lang^="zh"] .desktop-break {
 .panel.is-fading {
 	opacity: 0;
 }
+
+.form-row {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.form-field {
+	flex: 1 1 200px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.phone-field {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.phone-field select {
+	flex: 0 0 auto;
+}
+
+.phone-field input {
+	flex: 1 1 auto;
+}
+
+.consent-checkbox {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	font-size: 0.85rem;
+	margin: 0.5rem 0;
+}
+
+.consent-checkbox input {
+	margin-top: 0.2rem;
+}

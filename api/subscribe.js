@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DOB_RE = /^\d{2}\/\d{2}\/\d{4}$/;
 const PERSONA_LABELS = {
 	thrill: "Daredevil",
 	games: "Game MVP",
@@ -15,14 +16,10 @@ function respond(res, status, body) {
 	res.end(JSON.stringify(body));
 }
 
-// Reads the raw, unparsed body ourselves instead of letting
-// Vercel's automatic JSON parser crash on bad input.
 function readRawBody(req) {
 	return new Promise((resolve, reject) => {
 		let data = "";
-		req.on("data", (chunk) => {
-			data += chunk;
-		});
+		req.on("data", (chunk) => { data += chunk; });
 		req.on("end", () => resolve(data));
 		req.on("error", reject);
 	});
@@ -52,13 +49,32 @@ module.exports = async function handler(req, res) {
 	}
 	if (!body || typeof body !== "object") return respond(res, 400, { error: "invalid_submission" });
 
-	const { email, name, persona, locale } = body;
+	const {
+		email,
+		firstName,
+		lastName,
+		phone,
+		birthday,
+		marketingConsent,
+		dataSharingConsent,
+		persona,
+		locale,
+	} = body;
 
 	if (typeof email !== "string" || email.length > 320 || !EMAIL_RE.test(email)) {
 		return respond(res, 400, { error: "invalid_email" });
 	}
-	if (name !== undefined && (typeof name !== "string" || name.length > 200)) {
-		return respond(res, 400, { error: "invalid_name" });
+	if (firstName !== undefined && (typeof firstName !== "string" || firstName.length > 256)) {
+		return respond(res, 400, { error: "invalid_first_name" });
+	}
+	if (lastName !== undefined && (typeof lastName !== "string" || lastName.length > 256)) {
+		return respond(res, 400, { error: "invalid_last_name" });
+	}
+	if (phone !== undefined && (typeof phone !== "string" || phone.length > 32)) {
+		return respond(res, 400, { error: "invalid_phone" });
+	}
+	if (birthday !== undefined && (typeof birthday !== "string" || !DOB_RE.test(birthday))) {
+		return respond(res, 400, { error: "invalid_birthday" });
 	}
 	if (persona !== undefined && !PERSONA_LABELS[persona]) {
 		return respond(res, 400, { error: "invalid_persona" });
@@ -81,20 +97,35 @@ module.exports = async function handler(req, res) {
 	const url = `https://${dataCenter}.api.mailchimp.com/3.0/lists/${listId}/members/${subscriberHash}`;
 
 	const mergeFields = {};
-	if (name) mergeFields.FNAME = name;
+	if (firstName) mergeFields.FNAME = firstName;
+	if (lastName) mergeFields.LNAME = lastName;
+	if (phone) mergeFields.PHONE = phone;
+	if (birthday) mergeFields.BIRTHDAY = birthday;
 	if (persona) mergeFields.PERSONA = PERSONA_LABELS[persona];
+
+	// Maps to the two checkboxes on the live site (marketing consent / AIA data-sharing
+	// consent). Interest IDs are specific to this Mailchimp audience — fetched once via:
+	//   GET https://<dc>.api.mailchimp.com/3.0/lists/<listId>/interest-categories
+	//   GET .../interest-categories/<categoryId>/interests
+	// and set as env vars below.
+	const interests = {};
+	const marketingInterestId = process.env.MAILCHIMP_INTEREST_MARKETING_ID;
+	const dataSharingInterestId = process.env.MAILCHIMP_INTEREST_DATA_SHARING_ID;
+	if (marketingInterestId) interests[marketingInterestId] = Boolean(marketingConsent);
+	if (dataSharingInterestId) interests[dataSharingInterestId] = Boolean(dataSharingConsent);
 
 	const payload = {
 		email_address: email,
-		status_if_new: "subscribed", // only applies if this email is new
+		status_if_new: "subscribed",
 		...(Object.keys(mergeFields).length ? { merge_fields: mergeFields } : {}),
+		...(Object.keys(interests).length ? { interests } : {}),
 		...(locale ? { language: locale.startsWith("zh") ? "zh" : "en" } : {}),
 	};
 
 	let response, data;
 	try {
 		response = await fetch(url, {
-			method: "PUT", // upsert: creates on first call, updates merge fields on later calls
+			method: "PUT",
 			headers: {
 				Authorization: `apikey ${apiKey}`,
 				"Content-Type": "application/json",
@@ -115,8 +146,6 @@ module.exports = async function handler(req, res) {
 	return respond(res, 200, { success: true });
 };
 
-// This is the important new bit — tells Vercel:
-// "Don't auto-parse the body for me, I'll handle it myself above."
 module.exports.config = {
 	api: {
 		bodyParser: false,

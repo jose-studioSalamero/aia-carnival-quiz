@@ -42,21 +42,67 @@
 					<p><span data-i18n="introWelcome">Welcome! We are scouting the next wave of fans to join us at the AIA Carnival.</span><br class="desktop-break"> <span data-i18n="introInstructions">Answer the questions to unlock your official fan persona.</span></p>
 				</header>
 
-				<section class="mailing-list-section" aria-labelledby="mailing-list-title">
-					<h2 id="mailing-list-title" data-i18n="mailingListTitle">Join our mailing list</h2>
-					<form class="mailing-list-form">
-						<label for="mailing-list-name" data-i18n="nameLabel">Name</label>
-						<input id="mailing-list-name" name="name" type="text" autocomplete="name" placeholder="Your name" data-i18n-placeholder="namePlaceholder" required>
-						<label for="mailing-list-email" data-i18n="emailLabel">Email address</label>
-						<input id="mailing-list-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" data-i18n-placeholder="emailPlaceholder" required>
-						<p class="mailing-list-status" role="status" aria-live="polite" hidden></p>
-						<div class="intro-actions">
-							<button class="button button-primary" type="submit" data-i18n="emailSubmit">Submit</button>
-							<button class="button button-secondary" type="button" data-action="start" data-i18n="skip">Skip</button>
-						</div>
-					</form>
-				</section>
-			</section>
+<section class="mailing-list-section" aria-labelledby="mailing-list-title">
+	<h2 id="mailing-list-title" data-i18n="mailingListTitle">Join our mailing list</h2>
+	<form class="mailing-list-form">
+		<div class="form-row">
+			<div class="form-field">
+				<label for="mailing-list-first-name" data-i18n="nameLabel">Given Name*</label>
+				<input id="mailing-list-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="256" data-i18n-placeholder="namePlaceholder" required>
+			</div>
+			<div class="form-field">
+				<label for="mailing-list-last-name" data-i18n="surnameLabel">Surname*</label>
+				<input id="mailing-list-last-name" name="lastName" type="text" autocomplete="family-name" maxlength="256" data-i18n-placeholder="surnamePlaceholder" required>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-field">
+				<label for="mailing-list-email" data-i18n="emailLabel">Email*</label>
+				<input id="mailing-list-email" name="email" type="email" autocomplete="email" maxlength="256" data-i18n-placeholder="emailPlaceholder" required>
+			</div>
+			<div class="form-field">
+				<label for="mailing-list-phone" data-i18n="phoneLabel">Phone Number</label>
+				<div class="phone-field">
+					<select id="mailing-list-dial-code" name="dialCode" aria-label="Country dial code">
+						<option value="852" selected>HK +852</option>
+						<option value="853">MO +853</option>
+						<option value="86">CN +86</option>
+						<option value="886">TW +886</option>
+						<option value="65">SG +65</option>
+						<option value="60">MY +60</option>
+						<option value="44">UK +44</option>
+						<option value="1">US/CA +1</option>
+						<option value="61">AU +61</option>
+					</select>
+					<input id="mailing-list-phone" name="phone" type="tel" autocomplete="tel-national" maxlength="32" placeholder="5123 4567" data-i18n-placeholder="phonePlaceholder">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-field">
+				<label for="mailing-list-dob" data-i18n="dobLabel">Date of Birth</label>
+				<input id="mailing-list-dob" name="birthday" type="text" inputmode="numeric" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" placeholder="DD/MM/YYYY" data-i18n-placeholder="dobPlaceholder">
+			</div>
+		</div>
+
+		<label class="consent-checkbox">
+			<input type="checkbox" name="marketingConsent" checked required>
+			<span data-i18n="marketingConsentLabel">I wish to receive marketing and promotional materials from GCEG &amp; GEG. *</span>
+		</label>
+		<label class="consent-checkbox">
+			<input type="checkbox" name="dataSharingConsent">
+			<span data-i18n="dataSharingConsentLabel">I agree to GCEG sharing of my personal data with AIA International Limited acting through its Hong Kong Branch (“AIA”) so that I can receive marketing and promotional materials from them, such as offers, discounts, incentive programs, new services and other marketing information.</span>
+		</label>
+
+		<p class="mailing-list-status" role="status" aria-live="polite" hidden></p>
+		<div class="intro-actions">
+			<button class="button button-primary" type="submit" data-i18n="emailSubmit">Submit</button>
+			<button class="button button-secondary" type="button" data-action="start" data-i18n="skip">Skip</button>
+		</div>
+	</form>
+</section>
 
 			<section class="panel question-screen" data-screen="question" data-step="0" aria-labelledby="question-1-title" hidden>
 				<ol class="progress" aria-label="Question progress" data-i18n-aria="questionProgress">
