@@ -1,7 +1,35 @@
 const crypto = require("crypto");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const DOB_RE = /^\d{2}\/\d{2}\/\d{4}$/;
+function parseAndValidateBirthday(input) {
+  const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(input);
+  if (!match) return null;
+
+  const mm = Number(match[1]);
+  const dd = Number(match[2]);
+  const yyyy = Number(match[3]);
+
+  if (mm < 1 || mm > 12) return null;
+  if (dd < 1 || dd > 31) return null;
+  if (yyyy < 1900 || yyyy > new Date().getFullYear()) return null;
+
+  const d = new Date(yyyy, mm - 1, dd);
+  // Reject any overflow (e.g. Feb 30, Apr 31, Feb 29 on non-leap years)
+  if (d.getFullYear() !== yyyy || d.getMonth() !== mm - 1 || d.getDate() !== dd) {
+    return null;
+  }
+
+  // Reject future dates
+  if (d.getTime() > Date.now()) return null;
+
+  return `${match[1]}/${match[2]}/${match[3]}`; // already in correct MM/DD/YYYY format
+}
+
+const validBirthday = birthday ? parseAndValidateBirthday(birthday) : null;
+if (birthday && !validBirthday) {
+  return res.status(400).json({ error: "invalid_birthday" });
+}
+// only include BIRTHDAY in merge_fields if validBirthday is truthy
 const PERSONA_LABELS = {
 	thrill: "Daredevil",
 	games: "Game MVP",
@@ -100,7 +128,10 @@ module.exports = async function handler(req, res) {
 	if (firstName) mergeFields.FNAME = firstName;
 	if (lastName) mergeFields.LNAME = lastName;
 	if (phone) mergeFields.PHONE = phone;
-	if (birthday) mergeFields.BIRTHDAY = birthday;
+	if (birthday) {
+	const [day, month, year] = birthday.split("/");
+	mergeFields.BIRTHDAY = `${month}/${day}/${year}`;
+}
 	if (persona) mergeFields.PERSONA = PERSONA_LABELS[persona];
 
 	// Maps to the two checkboxes on the live site (marketing consent / AIA data-sharing
