@@ -770,8 +770,8 @@ html[lang^="zh"] .desktop-break {
 }
 
 .consent-checkbox {
-	display: flex;
-	align-items: flex-start;
+	width: 1.5rem;
+	height: 1.5rem;
 	gap: 0.5rem;
 	font-size: 0.85rem;
 	margin: 0.5rem 0;
