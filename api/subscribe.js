@@ -6,8 +6,9 @@ function parseAndValidateBirthday(input) {
 	const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(input);
 	if (!match) return null;
 
-	const mm = Number(match[1]);
-	const dd = Number(match[2]);
+	// Input is DD/MM/YYYY (matches the on-screen placeholder/label).
+	const dd = Number(match[1]);
+	const mm = Number(match[2]);
 	const yyyy = Number(match[3]);
 
 	if (mm < 1 || mm > 12) return null;
@@ -23,7 +24,11 @@ function parseAndValidateBirthday(input) {
 	// Reject future dates
 	if (d.getTime() > Date.now()) return null;
 
-	return `${match[1]}/${match[2]}/${match[3]}`; // already in correct MM/DD/YYYY format
+	// Return in MM/DD/YYYY — the format Mailchimp's "birthday" merge field
+	// type expects internally, independent of how the user typed it in.
+	const mmStr = String(mm).padStart(2, "0");
+	const ddStr = String(dd).padStart(2, "0");
+	return `${mmStr}/${ddStr}/${yyyy}`;
 }
 
 const PERSONA_LABELS = {
