@@ -106,7 +106,7 @@ const messages = {
 		introInstructions: "Answer the questions to unlock your official fan persona.",
 		mailingListTitle: "Join our mailing list",
 		nameLabel: "Given Name", namePlaceholder: "Your name",
-		emailLabel: "Email address", emailPlaceholder: "you@example.com",
+		emailLabel: "Email address*", emailPlaceholder: "you@example.com",
 		emailSubmit: "Submit", skip: "Skip",
 		emailNotConnected: "Mailing list sign-up isn't connected yet. Please use Skip to continue.",
 		section1: "1. Opening Protocol", section2: "2: Resource Allocation Test",
@@ -144,31 +144,31 @@ const messages = {
 		mainNavigation: "主選單", subscribe: "立即訂閱", chooseLanguage: "選擇語言", questionProgress: "問題進度",
 		introTitleFirst: "新一代個性探索",
 		introWelcome: "歡迎！我們正在尋找新一批粉絲加入友邦嘉年華。",
-		introInstructions: "回答以下問題，以了解你是屬於哪一類型的嘉年華粉絲。",
-		mailingListTitle: "訂閱嘉年華郵件列表",
+		introInstructions: "回答以下問題，看看你是哪一類嘉年華粉絲！",
+		mailingListTitle: "訂閱嘉年華電郵通訊",
 		nameLabel: "姓名", namePlaceholder: "你的姓名",
-		emailLabel: "電郵地址", emailPlaceholder: "you@example.com",
+		emailLabel: "電郵地址*", emailPlaceholder: "you@example.com",
 		emailSubmit: "提交", skip: "略過",
 		emailNotConnected: "郵件列表功能尚未連接，請按「略過」繼續。",
-		section1: "入場前準備事項", section2: "2：資源分配題",
-		section3: "3：補充能量策略", section4: "4：終極KPI", section5: "5：最後總結",
-		question1: "您已進入友邦嘉年華，第一件事會做什麼？",
-		q1a: "A) 直衝去最刺激的機動遊戲。", q1b: "B) 找最好玩的攤位遊戲並計劃贏取心水獎品。",
-		q1c: "C) 尋找必食美食。", q1d: "D) 尋找完美的自拍位置。",
-		question2: "你有$200，並且還有30分鐘才到高峰時間。你的計劃是什麼？",
-		q2a: "A) 盡力玩盡機動遊樂。", q2b: "B) 選擇獎品最好的攤位遊戲。",
-		q2c: "C) 食盡所有嘉年華小食。", q2d: "D) 找出最佳打卡位放上社交媒體。",
-		question3: "已是晚上7點，你需要補充能量。你會選擇什麼？",
-		q3a: "A) 喝杯咖啡，然後繼續玩機動遊戲。", q3b: "B) 在玩不同攤位遊戲之間吃點簡單小食。",
-		q3c: "C) 食一餐包含所有最愛的街頭美食盛宴。", q3d: "D) 品嚐最上鏡美食。",
-		question4: "建議：什麼能決定你在嘉年華的體驗是成功的？",
-		q4a: "A) 機動遊戲數量：體驗四個或以上刺激的機動遊戲。",
-		q4b: "B) 獎品收穫：一個巨型毛公仔。", q4c: "C) 美食指數：嘗試五個或以上的美食。",
-		q4d: "D) 內容分數：一篇貼文、一段Reel影片和一些夜景人像。",
-		question5: "為什麼你應該被招募為新一代超級粉絲？",
-		q5a: "A) 我為每一個機動遊戲都注入無畏無懼的活力。",
-		q5b: "B) 我將每一個攤位遊戲轉化為勝利策略。", q5c: "C) 我搜尋並品嚐最佳美食。",
-		q5d: "D) 我製作的內容能令嘉年華充滿無限歡樂。",
+		section1: "P1", section2: "P2",
+		section3: "P3", section4: "P4", section5: "P5",
+		question1: "一踏進友邦嘉年華，你會先做甚麼？",
+		q1a: "A）直奔最刺激的機動遊戲。", q1b: "B）尋找最好玩的攤位遊戲，並計劃贏取心水獎品。",
+		q1c: "C）尋找必吃美食。", q1d: "D）尋找最佳自拍位置。",
+		question2: "你手上有 $200，而距離人流高峰時段還有 30 分鐘。你會怎樣安排？",
+		q2a: "A）把握時間，盡情玩機動遊戲。", q2b: "B）挑戰獎品最吸引的攤位遊戲。",
+		q2c: "C）品嚐各款嘉年華特色小食。", q2d: "D）尋找最佳打卡位置，拍照分享到社交平台。",
+		question3: "現在已是晚上 7 時，是時候補充能量。你會怎樣選擇？",
+		q3a: "A）喝杯咖啡，然後繼續挑戰機動遊戲。", q3b: "B）在挑戰不同攤位遊戲之間，吃點簡單小食。",
+		q3c: "C）大飽口福，一次過品嚐各款至愛街頭美食。", q3d: "D）挑選最上鏡的美食，打卡拍照。",
+		question4: "對你來說，怎樣才算是一次完美的嘉年華體驗？",
+		q4a: "A）機動遊戲：挑戰四款或以上刺激的機動遊戲。",
+		q4b: "B）獎品收穫：贏得一隻巨型毛公仔。", q4c: "C）美食指數：品嚐五款或以上嘉年華美食。",
+		q4d: "D）內容產量：發布一篇帖文、一段 Reels 短片及多張令人羨慕的照片。",
+		question5: "為甚麼你應該獲選為新一代嘉年華超級粉絲？",
+		q5a: "A）我活力十足，最適合挑戰各款機動遊戲。",
+		q5b: "B）我深諳攤位遊戲的致勝策略，獎品自然手到拿來。", q5c: "C）我最愛發掘及品嚐場內各款美食。",
+		q5d: "D）我擅長創作精彩內容，將嘉年華的歡樂氣氛分享給更多人。", 
 		validation: "請選擇一個答案以繼續。", step: "第 {step}/5 題",
 		back: "返回", next: "下一題", viewPersona: "查看我的角色", retry: "再玩一次",
 		personaLabel: "官方粉絲類型",
@@ -186,31 +186,31 @@ const messages = {
 		mainNavigation: "主菜单", subscribe: "立即订阅", chooseLanguage: "选择语言", questionProgress: "问题进度",
 		introTitleFirst: "新一代个性探索",
 		introWelcome: "欢迎！我们正在寻找新一批粉丝加入友邦嘉年华。",
-		introInstructions: "回答以下问题，以了解你是属于哪一类型的嘉年华粉丝。",
-		mailingListTitle: "订阅嘉年华邮件列表",
+		introInstructions: "回答以下问题，看看你是哪一类嘉年华粉丝！",
+		mailingListTitle: "订阅嘉年华电邮通讯",
 		nameLabel: "姓名", namePlaceholder: "你的姓名",
-		emailLabel: "邮箱地址", emailPlaceholder: "you@example.com",
+		emailLabel: "邮箱地址*", emailPlaceholder: "you@example.com",
 		emailSubmit: "提交", skip: "跳过",
-		emailNotConnected: "邮件列表功能尚未连接，请点击“跳过”继续。",
-		section1: "入场前准备事项", section2: "2：资源分配题",
-		section3: "3：补充能量策略", section4: "4：终极KPI", section5: "5：最后总结",
-		question1: "您已进入友邦嘉年华，首先会做什么？",
-		q1a: "A) 直冲去最刺激的机动游戏。", q1b: "B) 找最好玩的摊位游戏并计划赢取心水奖品。",
-		q1c: "C) 寻找必吃美食。", q1d: "D) 寻找完美的自拍位置。",
-		question2: "你有$200，并还有30分钟才到高峰时间。你的计划是什么？",
-		q2a: "A) 玩遍所有机动游戏。", q2b: "B) 选择奖品最好的摊位游戏。",
-		q2c: "C) 尝遍所有嘉年华美食。", q2d: "D) 在最佳打卡位出片。",
-		question3: "已是晚上7点，你需要补充能量。你会选择什么？",
-		q3a: "A) 喝杯咖啡，然后继续玩机动游戏。", q3b: "B) 在玩不同摊位游戏之间吃点简单小吃。",
-		q3c: "C) 一顿饱餐，品尝所有最爱的街头美食。", q3d: "D) 品尝最出片的美食。",
-		question4: "建议：什么能证明你在嘉年华的体验是成功的？",
-		q4a: "A) 机动游戏数量：体验四个或以上刺激的机动游戏。",
-		q4b: "B) 奖品收获：一个巨型毛公仔。", q4c: "C) 美食指数：尝试五个或以上的美食。",
-		q4d: "D) 出片质量：一篇贴文、一段vlog影片和一些夜景人像。",
-		question5: "为什么你应该被招募为新一代超级粉丝？",
-		q5a: "A) 我为每一个机动游戏都注入无畏无惧的活力。",
-		q5b: "B) 我将每一个摊位游戏转化为胜利策略。", q5c: "C) 我搜寻并品尝最佳美食。",
-		q5d: "D) 我发布的社媒内容能令嘉年华更生动欢乐。",
+		emailNotConnected: "邮件列表功能尚未连接，请按“跳过”继续。",
+		section1: "P1", section2: "P2",
+		section3: "P3", section4: "P4", section5: "P5",
+		question1: "一踏进友邦嘉年华，你会先做什么？",
+		q1a: "A）直冲最刺激的机动游戏。", q1b: "B）寻找最好玩的摊位游戏，并计划赢取心水奖品。",
+		q1c: "C）寻找必吃美食。", q1d: "D）寻找最佳自拍位置。",
+		question2: "你手上有 $200，而距离人流高峰时段还有 30 分钟。你会怎样安排？",
+		q2a: "A）把握时间，尽情玩机动游戏。", q2b: "B）挑战奖品最吸引的摊位游戏。",
+		q2c: "C）品尝各类嘉年华特色小食。", q2d: "D）寻找最佳打卡位置，拍照分享到社交平台。",
+		question3: "现在已经是晚上 7 点，是时候补充能量。你会怎样选择？",
+		q3a: "A）喝杯咖啡，然后继续挑战机动游戏。", q3b: "B）在挑战不同摊位游戏之间，吃点简单小食。",
+		q3c: "C）大快朵颐，一次过品尝各款至爱的街头美食。", q3d: "D）挑选最上镜的美食，打卡拍照。",
+		question4: "对你来说，怎样才算是一次完美的嘉年华体验？",
+		q4a: "A）机动游戏：挑战四款或以上刺激的机动游戏。",
+		q4b: "B）奖品收获：赢得一只巨型毛公仔。", q4c: "C）美食指数：品尝五款或以上嘉年华美食。",
+		q4d: "D）内容产量：发布一篇帖子、一段 Reels 短片及多张令人羡慕的照片。",
+		question5: "为什么你应该被选为新一代嘉年华超级粉丝？",
+		q5a: "A）我活力十足，最适合挑战各类机动游戏。",
+		q5b: "B）我深谙摊位游戏的制胜策略，奖品自然手到拿来。", q5c: "C）我最爱发掘及品尝场内各类美食。",
+		q5d: "D）我擅长创作精彩内容，将嘉年华的欢乐气氛分享给更多人。", 
 		validation: "请选择一个答案以继续。", step: "第 {step}/5 题",
 		back: "返回", next: "下一题", viewPersona: "查看我的角色", retry: "再玩一次",
 		personaLabel: "官方粉丝类型",
@@ -297,7 +297,7 @@ function buildSubscriberPayload(form) {
 	};
 }
 
-document.querySelector(".mailing-list-form").addEventListener("submit", async (event) => {
+document.querySelector(".mailing-list-form").addEventListener("submit", (event) => {
 	event.preventDefault();
 	const form = event.currentTarget;
 	const status = document.querySelector(".mailing-list-status");
@@ -306,11 +306,8 @@ document.querySelector(".mailing-list-form").addEventListener("submit", async (e
 
 	subscriber = buildSubscriberPayload(form);
 
-	try {
-		await sendOrQueue("/api/subscribe", { ...subscriber, locale: activeLocale });
-	} catch (error) {
-		console.warn("Subscribe request queued (likely offline).", error);
-	}
+	sendOrQueue("/api/subscribe", { ...subscriber, locale: activeLocale })
+		.catch((error) => console.warn("Subscribe request queued (likely offline).", error));
 
 	status.textContent = messages[activeLocale].subscribeSuccess;
 	status.hidden = false;
@@ -356,6 +353,7 @@ async function showScreen(name, questionIndex = activeQuestion) {
 
 	if (name === "question") {
 		activeQuestion = questionIndex;
+		if (questionIndex === 0) window.scrollTo(0, 0);
 		const currentScreen = questions.find((screen) => Number(screen.dataset.step) === activeQuestion);
 		const progressSteps = currentScreen.querySelectorAll("[data-progress-step]");
 
